@@ -1,7 +1,7 @@
 /**
- * TableForge Data Structure
+ * Grid Composer Data Structure
  *
- * This defines the core data structure for tables created in TableForge.
+ * This defines the core data structure for tables created in Grid Composer.
  * The structure is designed to be clean, JSON-serializable, and easy to
  * consume by rendering components.
  */

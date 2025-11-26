@@ -1,6 +1,6 @@
-# TableForge - Interactive Table Builder for Sitecore XM Cloud
+# Grid Composer - Interactive Table Builder for Sitecore XM Cloud
 
-TableForge is a custom field integration for Sitecore XM Cloud that provides content authors with a powerful, visual interface for creating and editing tables. Tables are stored as clean, structured JSON and can be easily consumed by front-end rendering components.
+Grid Composer is a custom field integration for Sitecore XM Cloud that provides content authors with a powerful, visual interface for creating and editing tables. Tables are stored as clean, structured JSON and can be easily consumed by front-end rendering components.
 
 ## Features
 
@@ -34,10 +34,10 @@ TableForge is a custom field integration for Sitecore XM Cloud that provides con
 grid-composer/
 ├── app/
 │   ├── layout.tsx           # Root layout with MarketplaceProvider
-│   └── page.tsx             # Main page rendering TableForge
+│   └── page.tsx             # Main page rendering Grid Composer
 ├── components/
-│   ├── table-forge/
-│   │   ├── table-forge.tsx          # Main custom field component (SDK integration)
+│   ├── grid-composer/
+│   │   ├── grid-composer.tsx          # Main custom field component (SDK integration)
 │   │   ├── table-builder.tsx        # Interactive table editor UI
 │   │   ├── editable-cell.tsx        # Inline cell editing component
 │   │   └── cell-format-toolbar.tsx  # Cell formatting controls
@@ -52,7 +52,7 @@ grid-composer/
 
 ## Table Data Structure
 
-TableForge stores table data in a clean, versioned JSON format:
+Grid Composer stores table data in a clean, versioned JSON format:
 
 ```typescript
 {
@@ -125,7 +125,7 @@ npm start
 
 ### Extension Point Configuration
 
-TableForge is configured as a **custom field integration** using the extension point:
+Grid Composer is configured as a **custom field integration** using the extension point:
 
 ```typescript
 xmcPagesCustomField = 'xmc:pages:customfield'
@@ -142,17 +142,17 @@ The app uses the Sitecore Marketplace SDK for:
 
 ### Field Configuration in Sitecore
 
-When configuring TableForge as a custom field in Sitecore:
+When configuring Grid Composer as a custom field in Sitecore:
 
-1. Install the TableForge app from the Sitecore Marketplace
-2. Create a new field or update an existing field to use TableForge
-3. Set the field type to use the TableForge custom field integration
+1. Install the Grid Composer app from the Sitecore Marketplace
+2. Create a new field or update an existing field to use Grid Composer
+3. Set the field type to use the Grid Composer custom field integration
 4. The field should store JSON data (text/string field)
 
 ## How It Works
 
 ### Loading Data
-1. TableForge component mounts in the Sitecore field editor
+1. Grid Composer component mounts in the Sitecore field editor
 2. SDK establishes secure connection with Sitecore
 3. `client.getValue()` retrieves current field value
 4. JSON data is parsed and validated
@@ -174,7 +174,7 @@ When configuring TableForge as a custom field in Sitecore:
 
 ## Key Components
 
-### TableForge (`table-forge.tsx`)
+### Grid Composer (`grid-composer.tsx`)
 - Main custom field component
 - SDK integration (getValue/setValue)
 - Loading, error, and success states
@@ -199,7 +199,7 @@ When configuring TableForge as a custom field in Sitecore:
 
 ## Consuming Table Data
 
-Front-end components can easily consume the TableForge JSON data:
+Front-end components can easily consume the Grid Composer JSON data:
 
 ```typescript
 import { TableData, parseTableData } from '@/lib/types/table';
@@ -245,7 +245,7 @@ const tableData = parseTableData(fieldValue);
 
 ### "Invalid table data structure"
 - Existing field data may be corrupted or in wrong format
-- TableForge will create a new empty table automatically
+- Grid Composer will create a new empty table automatically
 - Check data validation logic in `lib/types/table.ts`
 
 ### Changes not saving
@@ -287,4 +287,4 @@ For issues, questions, or feature requests, please refer to the Sitecore Marketp
 
 ---
 
-**TableForge** - Built with ❤️ for Sitecore XM Cloud content authors
+**Grid Composer** - Built with ❤️ for Sitecore XM Cloud content authors

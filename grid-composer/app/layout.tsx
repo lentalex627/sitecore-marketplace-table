@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TableForge - Sitecore Table Builder",
+  title: "Grid Composer - Sitecore Table Builder",
   description: "Interactive table builder custom field integration for Sitecore XM Cloud",
 };
 

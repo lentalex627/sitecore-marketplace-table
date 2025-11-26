@@ -16,12 +16,12 @@ import { TableBuilder } from "./table-builder";
 import { Save, X, AlertCircle } from "lucide-react";
 
 /**
- * TableForge - Custom Field Integration Component
+ * Grid Composer - Custom Field Integration Component
  *
  * This component integrates with Sitecore XM Cloud as a custom field,
  * providing an interactive table builder interface.
  */
-export function TableForge() {
+export function GridComposer() {
   const client = useMarketplaceClient();
 
   // Table data state
@@ -188,73 +188,100 @@ export function TableForge() {
   }
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full min-h-screen bg-gradient-to-br from-background via-background to-muted/20 p-6 space-y-6">
       {/* Header with save/cancel actions */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-xl">TableForge</CardTitle>
-            <div className="flex items-center space-x-2">
-              {isDirty && (
-                <span className="text-sm text-muted-foreground">
-                  Unsaved changes
-                </span>
-              )}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleCancel}
-                disabled={!isDirty || isSaving}
-              >
-                <X className="h-4 w-4 mr-1" />
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                onClick={handleSave}
-                disabled={!isDirty || isSaving}
-              >
-                <Save className="h-4 w-4 mr-1" />
-                {isSaving ? "Saving..." : "Save"}
-              </Button>
+      <div className="max-w-7xl mx-auto">
+        <Card className="border-2 shadow-lg bg-card/95 backdrop-blur">
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                  Grid Composer
+                </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Create and customize your table with ease
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                {isDirty && (
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-full">
+                    <div className="h-2 w-2 bg-amber-500 rounded-full animate-pulse" />
+                    <span className="text-xs font-medium text-amber-700 dark:text-amber-300">
+                      Unsaved changes
+                    </span>
+                  </div>
+                )}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCancel}
+                  disabled={!isDirty || isSaving}
+                  className="transition-all hover:scale-105 disabled:scale-100"
+                >
+                  <X className="h-4 w-4 mr-2" />
+                  Cancel
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={handleSave}
+                  disabled={!isDirty || isSaving}
+                  className="bg-gradient-to-r from-primary to-primary/90 transition-all hover:scale-105 disabled:scale-100 shadow-md hover:shadow-lg"
+                >
+                  <Save className="h-4 w-4 mr-2" />
+                  {isSaving ? "Saving..." : "Save Table"}
+                </Button>
+              </div>
             </div>
-          </div>
-        </CardHeader>
-      </Card>
+          </CardHeader>
+        </Card>
+      </div>
 
       {/* Success message */}
-      {successMessage && (
-        <Alert variant="default" className="bg-green-50 border-green-200">
-          <div className="flex items-center space-x-2 text-green-800">
-            <svg
-              className="h-4 w-4"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+      <div className="max-w-7xl mx-auto">
+        {successMessage && (
+          <div className="animate-in slide-in-from-top-2 duration-300">
+            <Alert
+              variant="success"
+              className="border-2 shadow-md bg-success-bg/80 backdrop-blur"
             >
-              <path d="M5 13l4 4L19 7" />
-            </svg>
-            <span className="text-sm font-medium">{successMessage}</span>
+              <div className="flex items-center gap-2">
+                <div className="flex-shrink-0 h-5 w-5 rounded-full bg-success-500 flex items-center justify-center">
+                  <svg
+                    className="h-3 w-3 text-white"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2.5"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="font-medium">{successMessage}</span>
+              </div>
+            </Alert>
           </div>
-        </Alert>
-      )}
+        )}
 
-      {/* Error message */}
-      {error && (
-        <Alert variant="danger">
-          <AlertCircle className="h-4 w-4" />
-          <div className="ml-2">
-            <h4 className="font-semibold">Error</h4>
-            <p className="text-sm">{error}</p>
+        {/* Error message */}
+        {error && (
+          <div className="animate-in slide-in-from-top-2 duration-300">
+            <Alert variant="danger" className="border-2 shadow-md bg-danger-bg/80 backdrop-blur">
+              <AlertCircle className="h-5 w-5" />
+              <div className="space-y-1">
+                <h4 className="font-semibold">Error</h4>
+                <p className="text-sm opacity-90">{error}</p>
+              </div>
+            </Alert>
           </div>
-        </Alert>
-      )}
+        )}
+      </div>
 
       {/* Main table builder component */}
-      <TableBuilder data={tableData} onChange={handleTableChange} />
+      <div className="max-w-7xl mx-auto">
+        <TableBuilder data={tableData} onChange={handleTableChange} />
+      </div>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 
-import { TableForge } from "@/components/table-forge/table-forge";
+import { GridComposer } from "@/components/table-forge/table-forge";
 
-function TableForgePage() {
+function GridComposerPage() {
   return (
     <div className="min-h-screen bg-background">
-      <TableForge />
+      <GridComposer />
     </div>
   );
 }
 
-export default TableForgePage;
+export default GridComposerPage;

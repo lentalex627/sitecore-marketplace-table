@@ -169,7 +169,7 @@ export function EditableCell({
 
   if (isEditing) {
     return (
-      <div className="p-0">
+      <div className="p-0 animate-in fade-in duration-150">
         <input
           ref={inputRef}
           type="text"
@@ -178,7 +178,7 @@ export function EditableCell({
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           style={getInputStyles()}
-          className="focus:ring-2 focus:ring-primary"
+          className="focus:ring-2 focus:ring-primary focus:ring-offset-1 shadow-lg"
         />
       </div>
     );
@@ -190,14 +190,22 @@ export function EditableCell({
       style={getCellStyles()}
       className={`
         cursor-text
-        hover:bg-muted/50
-        transition-colors
+        hover:bg-primary/5
+        transition-all
+        duration-150
+        group
         ${isHeader ? "font-semibold" : ""}
-        ${!value ? "text-muted-foreground italic" : ""}
+        ${!value ? "text-muted-foreground/60 italic" : ""}
       `}
       title="Click to edit"
     >
-      {value || "Click to edit..."}
+      <span className="relative">
+        {value || (
+          <span className="group-hover:text-muted-foreground transition-colors">
+            Click to edit...
+          </span>
+        )}
+      </span>
     </div>
   );
 }

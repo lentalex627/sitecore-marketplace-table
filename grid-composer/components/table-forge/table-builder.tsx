@@ -327,33 +327,47 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
   const selectedCellData = getSelectedCellData();
 
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="space-y-4">
+    <Card className="border-2 shadow-xl bg-card/95 backdrop-blur">
+      <CardContent className="p-8">
+        <div className="space-y-6">
           {/* Table controls */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Button size="sm" variant="outline" onClick={handleAddRow}>
-                <Plus className="h-4 w-4 mr-1" />
+          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-muted/50 to-muted/30 rounded-xl border">
+            <div className="flex items-center gap-3">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleAddRow}
+                className="shadow-sm hover:shadow-md transition-all hover:scale-105 bg-background"
+              >
+                <Plus className="h-4 w-4 mr-2" />
                 Add Row
               </Button>
-              <Button size="sm" variant="outline" onClick={handleAddColumn}>
-                <Plus className="h-4 w-4 mr-1" />
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleAddColumn}
+                className="shadow-sm hover:shadow-md transition-all hover:scale-105 bg-background"
+              >
+                <Plus className="h-4 w-4 mr-2" />
                 Add Column
               </Button>
             </div>
-            <div className="text-sm text-muted-foreground">
-              {data.rows.length} rows × {data.columns.length} columns
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-background/80 rounded-full border shadow-sm">
+              <div className="h-2 w-2 bg-primary rounded-full" />
+              <span className="text-sm font-medium">
+                {data.rows.length} × {data.columns.length}
+              </span>
             </div>
           </div>
 
           {/* Cell formatting toolbar */}
           {selectedCell && selectedCellData && (
-            <div className="border rounded-lg p-3 bg-card">
-              <div className="mb-2">
-                <span className="text-sm font-medium">
-                  Format Cell (Row {selectedCell.rowIndex + 1}, Column{" "}
-                  {selectedCell.cellIndex + 1})
+            <div className="border-2 rounded-xl p-4 bg-gradient-to-br from-primary/5 to-primary/10 shadow-lg animate-in slide-in-from-top-2 duration-300">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-1.5 w-1.5 bg-primary rounded-full animate-pulse" />
+                <span className="text-sm font-semibold text-primary">
+                  Formatting Cell: Row {selectedCell.rowIndex + 1}, Column{" "}
+                  {selectedCell.cellIndex + 1}
                 </span>
               </div>
               <CellFormatToolbar
@@ -370,51 +384,54 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
           )}
 
           {/* Table editor */}
-          <div className="overflow-auto border rounded-lg">
+          <div className="overflow-auto border-2 rounded-xl shadow-lg bg-background">
             <table className="w-full border-collapse">
               <thead>
                 <tr>
                   {/* Row controls header */}
-                  <th className="bg-muted/50 border-b border-r p-2 w-32 text-xs font-medium">
-                    Row Controls
+                  <th className="bg-gradient-to-br from-muted/70 to-muted/50 border-b-2 border-r-2 p-3 w-40 text-xs font-semibold tracking-wide sticky left-0 z-10 shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-2 bg-primary rounded-full" />
+                      <span>Row Controls</span>
+                    </div>
                   </th>
                   {/* Column headers with controls */}
                   {data.columns.map((column, colIndex) => (
                     <th
                       key={column.id}
-                      className="bg-muted/50 border-b p-2 min-w-[150px]"
+                      className="bg-gradient-to-br from-muted/70 to-muted/50 border-b-2 p-3 min-w-[180px] group hover:from-muted hover:to-muted/70 transition-colors"
                     >
-                      <div className="flex flex-col space-y-1">
-                        <div className="flex items-center justify-center space-x-1">
+                      <div className="flex flex-col space-y-2">
+                        <div className="flex items-center justify-center gap-1.5">
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0"
+                            className="h-7 w-7 p-0 hover:bg-background/80 transition-all hover:scale-110"
                             onClick={() => handleMoveColumnLeft(colIndex)}
                             disabled={colIndex === 0}
                             title="Move column left"
                           >
-                            <ChevronLeft className="h-3 w-3" />
+                            <ChevronLeft className="h-3.5 w-3.5" />
                           </Button>
-                          <span className="text-xs font-medium">
+                          <span className="text-xs font-bold px-2 py-1 bg-background/60 rounded-md min-w-[50px] text-center">
                             Col {colIndex + 1}
                           </span>
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0"
+                            className="h-7 w-7 p-0 hover:bg-background/80 transition-all hover:scale-110"
                             onClick={() => handleMoveColumnRight(colIndex)}
                             disabled={colIndex === data.columns.length - 1}
                             title="Move column right"
                           >
-                            <ChevronRight className="h-3 w-3" />
+                            <ChevronRight className="h-3.5 w-3.5" />
                           </Button>
                         </div>
-                        <div className="flex items-center justify-center space-x-1">
+                        <div className="flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 px-2 text-xs"
+                            className="h-7 px-2 text-xs bg-background/80 hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
                             onClick={() => handleInsertColumnAfter(colIndex)}
                             title="Insert column after"
                           >
@@ -424,7 +441,7 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0 text-destructive hover:text-destructive"
+                            className="h-7 w-7 p-0 bg-background/80 hover:bg-red-500 hover:text-white transition-all shadow-sm"
                             onClick={() => handleRemoveColumn(colIndex)}
                             disabled={data.columns.length <= 1}
                             title="Delete column"
@@ -439,49 +456,53 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
               </thead>
               <tbody>
                 {data.rows.map((row, rowIndex) => (
-                  <tr key={row.id}>
+                  <tr key={row.id} className="group hover:bg-muted/20 transition-colors">
                     {/* Row controls */}
-                    <td className="bg-muted/50 border-r p-2">
-                      <div className="flex flex-col items-center space-y-1">
-                        <div className="flex items-center space-x-1">
+                    <td className="bg-gradient-to-r from-muted/50 to-muted/30 border-r-2 p-3 sticky left-0 z-10 shadow-sm">
+                      <div className="flex flex-col items-center space-y-2">
+                        <div className="flex items-center gap-1.5">
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0"
+                            className="h-7 w-7 p-0 hover:bg-background/80 transition-all hover:scale-110"
                             onClick={() => handleMoveRowUp(rowIndex)}
                             disabled={rowIndex === 0}
                             title="Move row up"
                           >
-                            <ChevronUp className="h-3 w-3" />
+                            <ChevronUp className="h-3.5 w-3.5" />
                           </Button>
-                          <span className="text-xs font-medium">
+                          <span className="text-xs font-bold px-2 py-1 bg-background/60 rounded-md min-w-[40px] text-center">
                             {rowIndex + 1}
                           </span>
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0"
+                            className="h-7 w-7 p-0 hover:bg-background/80 transition-all hover:scale-110"
                             onClick={() => handleMoveRowDown(rowIndex)}
                             disabled={rowIndex === data.rows.length - 1}
                             title="Move row down"
                           >
-                            <ChevronDown className="h-3 w-3" />
+                            <ChevronDown className="h-3.5 w-3.5" />
                           </Button>
                         </div>
                         <Button
                           size="sm"
                           variant={row.isHeader ? "default" : "outline"}
-                          className="h-6 px-2 text-xs w-full"
+                          className={`h-7 px-3 text-xs w-full transition-all shadow-sm ${
+                            row.isHeader
+                              ? "bg-gradient-to-r from-primary to-primary/90"
+                              : "hover:border-primary"
+                          }`}
                           onClick={() => handleToggleHeader(rowIndex)}
                           title="Toggle header row"
                         >
                           {row.isHeader ? "Header" : "Normal"}
                         </Button>
-                        <div className="flex items-center space-x-1">
+                        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 px-2 text-xs"
+                            className="h-7 px-2 text-xs bg-background/80 hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
                             onClick={() => handleInsertRowAfter(rowIndex)}
                             title="Insert row after"
                           >
@@ -490,7 +511,7 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-6 w-6 p-0 text-destructive hover:text-destructive"
+                            className="h-7 w-7 p-0 bg-background/80 hover:bg-red-500 hover:text-white transition-all shadow-sm"
                             onClick={() => handleRemoveRow(rowIndex)}
                             disabled={data.rows.length <= 1}
                             title="Delete row"
@@ -504,13 +525,13 @@ export function TableBuilder({ data, onChange }: TableBuilderProps) {
                     {row.cells.map((cell, cellIndex) => (
                       <td
                         key={cell.id}
-                        className={`border p-0 ${
-                          row.isHeader ? "bg-muted/20" : ""
+                        className={`border p-0 transition-all ${
+                          row.isHeader ? "bg-gradient-to-br from-muted/30 to-muted/20" : "bg-background"
                         } ${
                           selectedCell?.rowIndex === rowIndex &&
                           selectedCell?.cellIndex === cellIndex
-                            ? "ring-2 ring-primary ring-inset"
-                            : ""
+                            ? "ring-2 ring-primary ring-inset shadow-lg shadow-primary/20 scale-[1.02] z-10"
+                            : "hover:bg-muted/30"
                         }`}
                         onClick={() =>
                           setSelectedCell({ rowIndex, cellIndex })

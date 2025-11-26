@@ -1,6 +1,6 @@
-# TableForge Deployment Guide
+# Grid Composer Deployment Guide
 
-This guide covers deploying TableForge as a custom field integration to Sitecore XM Cloud.
+This guide covers deploying Grid Composer as a custom field integration to Sitecore XM Cloud.
 
 ## Prerequisites
 
@@ -68,7 +68,7 @@ Vercel provides seamless Next.js hosting with automatic builds and deployments.
    ```
 
 4. **Note the Deployment URL**:
-   - Vercel will provide a production URL (e.g., `https://tableforge.vercel.app`)
+   - Vercel will provide a production URL (e.g., `https://grid-composer.vercel.app`)
    - This URL will be used in Sitecore configuration
 
 #### Continuous Deployment:
@@ -81,7 +81,7 @@ For automatic deployments on Git push:
 
 ### Option B: Deploy to Other Hosting Providers
 
-TableForge can be deployed to any platform that supports Next.js:
+Grid Composer can be deployed to any platform that supports Next.js:
 
 - **Netlify**: Use the Netlify CLI or Git integration
 - **AWS Amplify**: Connect your Git repository
@@ -105,7 +105,7 @@ https://nextjs.org/docs/deployment
 
 3. **Configure App Details**:
    ```
-   App Name: TableForge
+   App Name: Grid Composer
    Description: Interactive table builder custom field for Sitecore XM Cloud
    App URL: https://your-deployment-url.vercel.app
    Category: Custom Fields
@@ -113,7 +113,7 @@ https://nextjs.org/docs/deployment
 
 4. **Set Extension Points**:
    - Select extension point: `xmc:pages:customfield`
-   - This registers TableForge as a custom field integration
+   - This registers Grid Composer as a custom field integration
 
 5. **Configure Resource Access** (if needed):
    - XM Cloud Authoring API (read/write for field data)
@@ -135,8 +135,8 @@ Ensure your app has a proper manifest configuration. Create or update `public/ma
 
 ```json
 {
-  "name": "TableForge",
-  "short_name": "TableForge",
+  "name": "Grid Composer",
+  "short_name": "Grid Composer",
   "description": "Interactive table builder custom field for Sitecore XM Cloud",
   "version": "0.1.0",
   "author": "Your Organization",
@@ -144,7 +144,7 @@ Ensure your app has a proper manifest configuration. Create or update `public/ma
     {
       "type": "xmc:pages:customfield",
       "route": "/",
-      "title": "TableForge",
+      "title": "Grid Composer",
       "description": "Visual table builder with inline editing",
       "iconUrl": "/icon.png"
     }
@@ -157,12 +157,12 @@ Ensure your app has a proper manifest configuration. Create or update `public/ma
 
 1. **Navigate to Content Editor** in XM Cloud
 2. **Create Field Template**:
-   - Template Name: "TableForge Field"
+   - Template Name: "Grid Composer Field"
    - Base Template: Standard Template
    - Field Type: Single-Line Text or Multi-Line Text (for JSON storage)
 
-3. **Configure Field to Use TableForge**:
-   - In the field definition, set the custom field integration to "TableForge"
+3. **Configure Field to Use Grid Composer**:
+   - In the field definition, set the custom field integration to "Grid Composer"
    - This associates the field with your marketplace app
 
 ## Environment Variables
@@ -172,7 +172,7 @@ If your app requires environment variables:
 ### Local Development (`.env.local`):
 ```env
 # Add any required environment variables
-NEXT_PUBLIC_APP_NAME=TableForge
+NEXT_PUBLIC_APP_NAME=Grid Composer
 NEXT_PUBLIC_APP_VERSION=0.1.0
 ```
 
@@ -224,14 +224,14 @@ Always deploy to HTTPS endpoints. Sitecore requires secure connections.
 
 1. Navigate to your XM Cloud instance
 2. Go to Marketplace
-3. Find and install "TableForge"
+3. Find and install "Grid Composer"
 4. Grant necessary permissions
 
 ### 2. Create Test Content
 
-1. Create a new content item with a TableForge field
+1. Create a new content item with a Grid Composer field
 2. Open the item in Content Editor or Experience Editor
-3. The TableForge interface should load in the field editor
+3. The Grid Composer interface should load in the field editor
 
 ### 3. Test Functionality
 

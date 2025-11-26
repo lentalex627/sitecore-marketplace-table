@@ -1,10 +1,10 @@
-# TableForge Quick Start Guide
+# Grid Composer Quick Start Guide
 
-Get TableForge up and running in minutes!
+Get Grid Composer up and running in minutes!
 
 ## What You've Built
 
-TableForge is now a fully functional custom field integration for Sitecore XM Cloud with:
+Grid Composer is now a fully functional custom field integration for Sitecore XM Cloud with:
 
 ✅ **Interactive Table Builder**: Visual interface for creating tables
 ✅ **Inline Cell Editing**: Click-to-edit functionality
@@ -29,7 +29,7 @@ Access at: http://localhost:3000
 
 The app uses Next.js with hot-reload. Edit any file and see changes instantly:
 
-- **Components**: `components/table-forge/`
+- **Components**: `components/grid-composer/`
 - **Data Types**: `lib/types/table.ts`
 - **Styles**: Uses Tailwind CSS and Blok components
 
@@ -54,8 +54,8 @@ Output: Optimized production build (142 kB total)
 ### Core Components
 
 ```
-components/table-forge/
-├── table-forge.tsx           # Main component (SDK integration)
+components/grid-composer/
+├── grid-composer.tsx           # Main component (SDK integration)
 ├── table-builder.tsx         # Table editor UI
 ├── editable-cell.tsx         # Inline cell editing
 ├── cell-format-toolbar.tsx   # Formatting controls
@@ -89,7 +89,7 @@ lib/types/table.ts            # Table data structure & utilities
    vercel --prod
    ```
 
-3. **Get URL**: Copy the production URL (e.g., https://tableforge.vercel.app)
+3. **Get URL**: Copy the production URL (e.g., https://grid-composer.vercel.app)
 
 ### Configure in Sitecore
 
@@ -105,14 +105,14 @@ See `DEPLOYMENT.md` for detailed instructions.
 
 ### Prerequisites
 
-- TableForge app deployed
+- Grid Composer app deployed
 - App installed in XM Cloud
-- Field configured to use TableForge
+- Field configured to use Grid Composer
 
 ### Test Checklist
 
 1. **Load Test**:
-   - [ ] Open content item with TableForge field
+   - [ ] Open content item with Grid Composer field
    - [ ] Table editor loads (or creates new table)
    - [ ] No console errors
 
@@ -182,8 +182,8 @@ defaultCellFormat: {
 
 ### Update Project Name
 
-Already set to "TableForge" in:
-- `package.json` (name: "tableforge")
+Already set to "Grid Composer" in:
+- `package.json` (name: "grid-composer")
 - `app/layout.tsx` (metadata title)
 
 ### Change Table Appearance
@@ -197,7 +197,7 @@ className="ring-2 ring-primary" // Selected cell
 
 ### Modify Save Behavior
 
-In `table-forge.tsx`:
+In `grid-composer.tsx`:
 ```typescript
 // Change canvas reload on save
 await client.setValue(jsonData, false);  // false = no reload
