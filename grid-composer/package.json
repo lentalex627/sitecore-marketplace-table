@@ -1,7 +1,8 @@
 {
-  "name": "grid-composer",
+  "name": "tableforge",
   "version": "0.1.0",
   "private": true,
+  "description": "TableForge - Interactive table builder custom field for Sitecore XM Cloud",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
